@@ -1,0 +1,16 @@
+/* CSS Variables untuk Assets */
+:root {
+  --auth-bg-image: url('@/assets/images/auth-bg.png');
+  --auth-bg-light-image: url('@/assets/images/auth-bg-light.png');
+  --logo-image: url('@/assets/images/logo-rrfx3.png');
+}
+
+/* Dark theme variables */
+.dark-theme {
+  --auth-bg-image: url('@/assets/images/auth-bg.png');
+}
+
+/* Light theme variables */
+.light-theme {
+  --auth-bg-image: url('@/assets/images/auth-bg-light.png');
+}
