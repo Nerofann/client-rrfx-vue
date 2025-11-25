@@ -11,12 +11,13 @@ onMounted(() => {
 </script>
 
 <template>
-    <label class="form-check-label text-white" for="loginCheckbox">
-        Saya telah membaca dan menyetujui 
-        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#addLabelModal" class="text-white text-decoration-underline">
-            Syarat dan Ketentuan serta Kebijakan Privasi
-        </a>
-    </label>
+    <div class="form-check">
+        <input class="form-check-input" name="terms" type="checkbox" required id="loginCheckbox">
+        <label class="form-check-label text-white" for="loginCheckbox">
+            Saya telah membaca dan menyetujui 
+            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#addLabelModal" class="text-white text-decoration-underline">Syarat dan Ketentuan serta Kebijakan Privasi</a>
+        </label>
+    </div>
 
     <div class="modal-block">
         <div class="modal fade" id="addLabelModal" tabindex="-1" aria-labelledby="addLabelModalLabel" aria-hidden="true">
