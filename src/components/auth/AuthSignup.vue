@@ -25,6 +25,10 @@ const { handleSubmit, setFieldError } = useForm({
     },
     initialValues: {
         phone_code: '+62',
+        fullname: 'Faniannur',
+        email: 'faniannur@example.com',
+        password: 'Password123!',
+        phone: '81234567890',
     }
 })
 
@@ -47,6 +51,7 @@ const submitSignup = handleSubmit(async values => {
 
     } catch (error) {
         const serverErrors = error.response?.data?.errors || {};
+        errorAlert(error.response?.data?.message || 'Registration failed. Please try again.');
         Object.keys(error.response?.data?.errors).forEach(key => {
             setFieldError(key, serverErrors[key][0]);
         })
