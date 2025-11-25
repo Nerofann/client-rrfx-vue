@@ -8,6 +8,7 @@ import * as yup from 'yup';
 import { register } from '@/api/auth/auth.api';
 import { useSweetAlert } from '@/composables/useSweetAlert';
 import router from '@/router';
+import { showPassword } from '@/composables/useHelper';
 
 const country = useCountryStore();
 const { handleSubmit, setFieldError } = useForm({
@@ -25,10 +26,6 @@ const { handleSubmit, setFieldError } = useForm({
     },
     initialValues: {
         phone_code: '+62',
-        fullname: 'Faniannur',
-        email: 'faniannur@example.com',
-        password: 'Password123!',
-        phone: '81234567890',
     }
 })
 
@@ -100,8 +97,8 @@ onMounted(() => {
                 <div class="mb-25">
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa-regular fa-lock"></i></span>
-                        <input type="password" v-model="password" class="form-control rounded-end" :class="{ 'error': errorPassword }" autocomplete="off" placeholder="Password" title="Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character, and be at least 8 characters long." required>
-                        <a role="button" class="password-show"><i class="fa-duotone fa-eye"></i></a>
+                        <input type="password" id="password" v-model="password" class="form-control rounded-end" :class="{ 'error': errorPassword }" autocomplete="off" placeholder="Password" title="Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character, and be at least 8 characters long." required>
+                        <a role="button" class="password-show" @click="showPassword('password')"><i class="fa-duotone fa-eye"></i></a>
                     </div>
                     <span class="error-message">{{ errorPassword }}</span>
                 </div>
