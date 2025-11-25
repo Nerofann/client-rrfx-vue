@@ -25,7 +25,7 @@ http.interceptors.response.use(
 export const parser = (r) => {
     return {
         code: r.status || 0,
-        message: r?.response?.message || r?.message || 'An unexpected error occurred',
-        data: r?.response?.data || {},
+        message: r?.data?.message || r?.message || 'An unexpected error occurred',
+        data: r?.data || {},
     }
 }
