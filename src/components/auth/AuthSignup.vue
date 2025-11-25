@@ -41,6 +41,11 @@ const submitSignup = handleSubmit(async values => {
     try {   
         isLoading.value = true;
         const response = await register(values);
+        if(response.code !== 200) {
+            errorAlert(response.message || "Failed");
+            return;
+        }
+        
         successAlert(response.message).then(() => {
             router.push('/');
         })
