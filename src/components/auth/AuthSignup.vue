@@ -41,8 +41,7 @@ const submitSignup = handleSubmit(async values => {
     try {   
         isLoading.value = true;
         const response = await register(values);
-        successAlert(response.message).then(() => {
-            console.log('Redirecting to login page...');
+        await successAlert(response.message).then(() => {
             router.push('/');
         })
 
