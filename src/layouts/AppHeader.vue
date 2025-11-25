@@ -1,3 +1,8 @@
+<script setup>
+import LogoWhite from '@/components/icons/LogoWhite.vue';
+import DefaultAvatar from '@/components/icons/DefaultAvatar.vue';
+</script>
+
 <template>
     <!-- preloader start -->
     <div class="preloader d-none">
@@ -16,12 +21,12 @@
                 <div class="main-logo d-lg-block d-none">
                     <div class="logo-big">
                         <a href="/dashboard">
-                            <img src="/assets/images/logo-white-new.png" alt="Logo">
+                            <LogoWhite />
                         </a>
                     </div>
                     <div class="logo-small">
                         <a href="/dashboard">
-                            <img src="/assets/images/favicon/ms-icon-144x144.png" alt="Logo">
+                            <LogoWhite />
                         </a>
                     </div>
                 </div>
@@ -32,7 +37,7 @@
             <div class="col-4 d-lg-none">
                 <div class="mobile-logo">
                     <a href="/dashboard">
-                        <img src="/assets/images/logo-white-new.png" alt="Logo">
+                        <LogoWhite />
                     </a>
                 </div>
             </div>
@@ -96,7 +101,7 @@
                     <div class="header-btn-box profile-btn-box">
                         <button class="" data-bs-toggle="dropdown" aria-expanded="false" style="border: 0px; background: transparent;">
                             <div class="custom-avatar-container" style="width: 40px; height: 40px;">
-                                <img class="custom-avatar" style="width: 40px; height: 40px;" src="/public/images/admin.png" alt="image">
+                                <DefaultAvatar />
                             </div>
                         </button>
                         <ul class="dropdown-menu profile-dropdown-menu">
