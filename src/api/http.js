@@ -16,8 +16,16 @@ http.interceptors.request.use((config) => {
 })
 
 http.interceptors.response.use(
-    (response => response),
+    (response => parser(response)),
     (error) => {
         return Promise.reject(error);
     }
 )
+
+export const parser = (r) => {
+    return {
+        code: r.status || 0,
+        message: r?.response?.message || r?.message || 'An unexpected error occurred',
+        data: r?.response?.data || {},
+    }
+}
