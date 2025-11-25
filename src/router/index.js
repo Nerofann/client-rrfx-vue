@@ -1,7 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import AuthLogin from '@/components/authentication/AuthLogin.vue'
-import AuthSignup from '@/components/authentication/AuthSignup.vue'
-import AuthLayout from '@/components/authentication/AuthLayout.vue'
+import AuthLayout from '@/components/auth/AuthLayout.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,11 +10,15 @@ const router = createRouter({
       children: [
         {
           path: '',
-          component: AuthLogin
+          name: "login",
+          component: () => import('@/components/auth/AuthLogin.vue'),
+          props: route => route.params || {}
         },
         {
           path: 'signup',
-          component: AuthSignup
+          name: "signup",
+          component: () => import('@/components/auth/AuthSignup.vue'),
+          props: route => route.params || {}
         }
       ]
     },

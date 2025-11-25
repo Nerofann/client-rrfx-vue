@@ -5,23 +5,19 @@ export const useSweetAlert = () => {
     const showAlert = ref(false);
 
     const errorAlert = (message) => {
-        Swal.fire({
+        return Swal.fire({
             icon: 'error',
             title: 'Error',
             text: message,
         });
     }
 
-    const successAlert = (message, callback) => {
-        Swal.fire({
+    const successAlert = (message) => {
+        return Swal.fire({
             icon: 'success',
             title: 'Success',
             text: message,
-        }).then(() => {
-            if (callback) {
-                callback();
-            }
-        });
+        })
     }
 
     return {

@@ -87,3 +87,12 @@ input[type=number] {
 .dark-theme .swal2-popup .swal2-input {
     color: white !important;
 }
+
+.error-message {
+    color: var(--bs-danger);
+    font-size: 0.7em;
+}
+
+input.error {
+    border-color: var(--bs-danger) !important;
+}
