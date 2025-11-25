@@ -41,7 +41,7 @@ const submitSignup = handleSubmit(async values => {
     try {   
         isLoading.value = true;
         const response = await register(values);
-        await successAlert(response.message).then(() => {
+        successAlert(response.message).then(() => {
             router.push('/');
         })
 
