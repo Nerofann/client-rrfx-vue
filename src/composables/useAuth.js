@@ -1,29 +1,19 @@
 import { useLocalStorage } from "@vueuse/core";
 
-const token = useLocalStorage('token', { 
-    accessToken: null, 
-    refreshToken: null 
-});
-
 export const saveToken = (accessToken, refreshToken) => {
-    token.value = {
-        accessToken: accessToken,
-        refreshToken: refreshToken
-    };
-    return token.value;
+    useLocalStorage('access_token', null).value = accessToken;
+    useLocalStorage('refresh_token', null).value = refreshToken;
 }
 
 export const getToken = () => {
-    return token.value;
+    return useLocalStorage('access_token', null).value;
 }
 
 export const clearToken = () => {
-    token.value = {
-        accessToken: null,
-        refreshToken: null
-    };
+    useLocalStorage('access_token', null).value = null;
+    useLocalStorage('refresh_token', null).value = null;
 }
 
 export const isAuthenticated = () => {
-    return !!token.value.accessToken;
+    return !!useLocalStorage('access_token', null).value;
 }
