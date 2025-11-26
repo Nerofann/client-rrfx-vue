@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import AuthLayout from '@/layouts/AuthLayout.vue'
 import { isAuthenticated } from '@/composables/useAuth'
+import { clearToken } from '@/composables/useAuth'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -43,6 +44,14 @@ const router = createRouter({
           component: () => import('@/views/profile/Profile.vue')
         }
       ]
+    },
+    {
+      path: '/logout',
+      name: 'logout',
+      beforeEnter: async () => {
+        await clearToken();
+        window.location.href = '/';
+      }
     },
 
     // 404 Not Found

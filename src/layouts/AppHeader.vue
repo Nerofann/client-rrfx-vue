@@ -5,9 +5,9 @@ import DefaultAvatar from '@/components/icons/DefaultAvatar.vue';
 
 const props = defineProps({
     user: {
-        type: Object,
-        required: true,
-        default: () => { return { fullname: 'Guest' }; }
+        type: [Object],
+        required: false, 
+        default: () => ({ fullname: 'Guest' })
     } 
 });
 
@@ -351,14 +351,7 @@ const initHeaderCollapse = () => {
                         <ul class="dropdown-menu profile-dropdown-menu">
                             <li>
                                 <div class="dropdown-txt text-center">
-                                    <p class="mb-0">Testing</p>
-                                    <!-- <span class="d-block">Web Developer</span> -->
-                                    <div class="d-flex justify-content-center">
-                                        <div class="form-check pt-3">
-                                            <input class="form-check-input" type="checkbox" id="seeProfileAsSidebar">
-                                            <label class="form-check-label" for="seeProfileAsSidebar">See as sidebar</label>
-                                        </div>
-                                    </div>
+                                    <p class="mb-0">{{ props.user?.fullname }}</p>
                                 </div>
                             </li>
                             <li><a class="dropdown-item" href="/personal-information"><span class="dropdown-icon"><i class="fa-regular fa-circle-user"></i></span> Profile</a></li>
@@ -372,40 +365,4 @@ const initHeaderCollapse = () => {
         </div>
     </div>
     <!-- header end -->
-
-    <!-- profile right sidebar start -->
-    <div class="profile-right-sidebar">
-        <button class="right-bar-close"><i class="fa-light fa-angle-right"></i></button>
-        <div class="top-panel">
-            <div class="profile-content scrollable">
-                <ul>
-                    <li>
-                        <div class="dropdown-txt text-center">
-                            <p class="mb-0">Testing</p>
-                            <!-- <span class="d-block">Web Developer</span> -->
-                            <div class="d-flex justify-content-center">
-                                <div class="form-check pt-3">
-                                    <input class="form-check-input" type="checkbox" id="seeProfileAsDropdown">
-                                    <label class="form-check-label" for="seeProfileAsDropdown">See as dropdown</label>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="/personal-information"><span class="dropdown-icon"><i class="fa-regular fa-circle-user"></i></span> Profile</a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="/help-center"><span class="dropdown-icon"><i class="fa-regular fa-circle-question"></i></span> Help</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="bottom-panel">
-            <div class="button-group">
-                <a href="/personal-information"><i class="fa-light fa-gear"></i><span>Settings</span></a>
-                <a href="/logout"><i class="fa-light fa-power-off"></i><span>Logout</span></a>
-            </div>
-        </div>
-    </div>
-    <!-- profile right sidebar end -->
 </template>
