@@ -32,7 +32,6 @@ const submitLogin = handleSubmit(async values => {
             return;
         }
 
-        console.log(response);
         await saveToken(response.data.access_token, response.data.refresh_token);
         showLoadingRedirect.value = true;
         setTimeout(() => {
