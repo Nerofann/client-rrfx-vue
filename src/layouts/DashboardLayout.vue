@@ -3,13 +3,18 @@ import { RouterView } from 'vue-router'
 import AppFooter from '@/layouts/AppFooter.vue';
 import AppHeader from '@/layouts/AppHeader.vue';
 import AppSidebar from '@/layouts/AppSidebar.vue';
-    
+import { onMounted } from 'vue';
+
+onMounted(() => {
+    window.document.body.className = 'body-padding body-p-top light-theme'
+});
 </script>
 
 <template>
-    <div class="main-content login-panel login-panel-2">
-        <AppHeader />
-        <AppSidebar />
+    <AppHeader />
+    <AppSidebar />
+    
+    <div class="main-content">
         <RouterView />
         <AppFooter />
     </div>
