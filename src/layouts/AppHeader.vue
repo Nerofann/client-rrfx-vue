@@ -1,15 +1,10 @@
 <script setup>
-import { onMounted, nextTick } from 'vue';
+import { onMounted, nextTick, watch } from 'vue';
 import LogoWhite from '@/components/icons/LogoWhite.vue';
 import DefaultAvatar from '@/components/icons/DefaultAvatar.vue';
+import { useUser } from '@/composables/useUser';
 
-const props = defineProps({
-    user: {
-        type: [Object],
-        required: false, 
-        default: () => ({ fullname: 'Guest' })
-    } 
-});
+const { User, loading } = useUser();
 
 onMounted(() => {
     nextTick(() => {
@@ -351,7 +346,8 @@ const initHeaderCollapse = () => {
                         <ul class="dropdown-menu profile-dropdown-menu">
                             <li>
                                 <div class="dropdown-txt text-center">
-                                    <p class="mb-0">{{ props.user?.fullname }}</p>
+                                    <p v-if="!User || loading">Loading...</p>
+                                    <p v-else>{{ User.fullname }}</p>
                                 </div>
                             </li>
                             <li><a class="dropdown-item" href="/personal-information"><span class="dropdown-icon"><i class="fa-regular fa-circle-user"></i></span> Profile</a></li>
