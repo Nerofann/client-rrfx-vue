@@ -5,7 +5,7 @@ import { isAuthenticated } from '@/composables/useAuth'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    // Public Routes (Guest Only)
+    // Auth Routes (Guest Only) - menggunakan AuthLayout
     {
       path: '/',
       component: AuthLayout,
@@ -15,39 +15,42 @@ const router = createRouter({
           path: '',
           name: "login",
           component: () => import('@/views/auth/AuthLogin.vue'),
-          meta: { requiresGuest: true },
-          props: route => route.params || {}
+          meta: { requiresGuest: true }
         },
         {
           path: 'signup',
           name: "signup",
           component: () => import('@/views/auth/AuthSignup.vue'),
-          meta: { requiresGuest: true },
-          props: route => route.params || {}
+          meta: { requiresGuest: true }
         }
       ]
     },
 
-    // Protected Routes (Authenticated Only)
+    // Dashboard Area Routes (Authenticated Only) - menggunakan DashboardLayout
     {
       path: '/dashboard',
-      name: 'dashboard',
       component: () => import('@/layouts/DashboardLayout.vue'),
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true },
+      children: [
+        {
+          path: '',
+          name: 'dashboard',
+          component: () => import('@/views/dashboard/Dashboard.vue')
+        },
+        {
+          path: '/profile',
+          name: 'profile',
+          component: () => import('@/views/profile/Profile.vue')
+        }
+      ]
     },
-    // {
-    //   path: '/profile',
-    //   name: 'profile',
-    //   component: () => import('@/views/layouts/ProfileLayout.vue'),
-    //   meta: { requiresAuth: true }
-    // },
 
-    // // 404 Not Found
-    // {
-    //   path: '/:pathMatch(.*)*',
-    //   name: 'notFound',
-    //   component: () => import('@/views/layouts/NotFound.vue')
-    // }
+    // 404 Not Found
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'notFound',
+      component: () => import('@/views/NotFound.vue')
+    }
   ],
 })
 
