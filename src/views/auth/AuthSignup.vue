@@ -1,7 +1,7 @@
 <script setup>
 import { RouterLink } from 'vue-router'
 import TermsCondition from '@/components/modal/TermsCondition.vue'
-import { useCountryStore } from '@/store/countries';
+import { useCountryStore } from '@/store/countries.store';
 import { onMounted, ref } from 'vue';
 import { useField, useForm, useSetFieldError } from 'vee-validate';
 import * as yup from 'yup';
