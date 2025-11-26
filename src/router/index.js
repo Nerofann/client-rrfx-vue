@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import AuthLayout from '@/layouts/AuthLayout.vue'
+import ErrorLayout from '@/layouts/ErrorLayout.vue'
 import { isAuthenticated } from '@/composables/useAuth'
 import { clearToken } from '@/composables/useAuth'
 
@@ -16,13 +17,11 @@ const router = createRouter({
           path: '',
           name: "login",
           component: () => import('@/views/auth/AuthLogin.vue'),
-          meta: { requiresGuest: true }
         },
         {
           path: 'signup',
           name: "signup",
           component: () => import('@/views/auth/AuthSignup.vue'),
-          meta: { requiresGuest: true }
         }
       ]
     },
@@ -37,6 +36,16 @@ const router = createRouter({
           path: '',
           name: 'dashboard',
           component: () => import('@/views/dashboard/Dashboard.vue')
+        },
+        {
+          path: '/verification/step-1',
+          name: 'verification-step-1',
+          component: () => import('@/views/verification/Step1.vue')
+        },
+        {
+          path: '/verification/step-2',
+          name: 'verification-step-2',
+          component: () => import('@/views/verification/Step2.vue')
         },
         {
           path: '/profile',
@@ -58,7 +67,13 @@ const router = createRouter({
     {
       path: '/:pathMatch(.*)*',
       name: 'notFound',
-      component: () => import('@/views/NotFound.vue')
+      component: ErrorLayout,
+      children: [
+        {
+          path: '',
+          component: () => import('@/views/NotFound.vue')
+        }
+      ]
     }
   ],
 })
@@ -69,18 +84,14 @@ router.beforeEach((to, from, next) => {
 
   // Check if route requires authentication
   if (to.meta.requiresAuth && !userIsAuthenticated) {
-    // Redirect to login if not authenticated
     next({ name: 'login' });
   } 
-  // Check if route requires guest (not authenticated)
-  // else if (to.meta.requiresGuest && userIsAuthenticated) {
-  //   // Redirect to dashboard if already authenticated
-  //   next({ name: 'dashboard' });
-  // } 
-  // Allow navigation
-  else {
-    next();
+
+  if(to.meta.requiresGuest && userIsAuthenticated) {
+    next({ name: 'dashboard' });
   }
+
+  next();
 });
 
 export default router
