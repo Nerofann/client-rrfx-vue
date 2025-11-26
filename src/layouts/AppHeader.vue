@@ -3,6 +3,14 @@ import { onMounted, nextTick } from 'vue';
 import LogoWhite from '@/components/icons/LogoWhite.vue';
 import DefaultAvatar from '@/components/icons/DefaultAvatar.vue';
 
+const props = defineProps({
+    user: {
+        type: Object,
+        required: true,
+        default: () => { return { fullname: 'Guest' }; }
+    } 
+});
+
 onMounted(() => {
     nextTick(() => {
         initNavClose();
@@ -150,12 +158,34 @@ const initProfileSidebar = () => {
     const seeAsDropdownCheckbox = document.getElementById('seeProfileAsDropdown');
     const profileRightSidebar = document.querySelector('.profile-right-sidebar');
     const rightBarClose = document.querySelector('.right-bar-close');
+    const profileBtn = document.querySelector('.profile-btn-box button');
+    
+    // Profile button click handler
+    if (profileBtn) {
+        profileBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // Check if button has data-bs-toggle="dropdown" (dropdown mode)
+            if (!profileBtn.hasAttribute('data-bs-toggle')) {
+                // Sidebar mode - toggle sidebar
+                const isActive = profileRightSidebar?.classList.contains('active');
+                if (isActive) {
+                    profileRightSidebar?.classList.remove('active');
+                    document.body.classList.remove('overflow-hidden');
+                } else {
+                    profileRightSidebar?.classList.add('active');
+                    document.body.classList.add('overflow-hidden');
+                }
+            }
+            // If has data-bs-toggle, Bootstrap will handle dropdown automatically
+        });
+    }
     
     // Toggle between sidebar and dropdown
     if (seeAsSidebarCheckbox) {
         seeAsSidebarCheckbox.addEventListener('change', function() {
             if (this.checked) {
-                const profileBtn = document.querySelector('.profile-btn-box button');
                 profileBtn?.setAttribute('id', 'profileDropdown');
                 profileBtn?.removeAttribute('data-bs-toggle');
                 profileRightSidebar?.classList.add('active');
@@ -168,7 +198,6 @@ const initProfileSidebar = () => {
     if (seeAsDropdownCheckbox) {
         seeAsDropdownCheckbox.addEventListener('change', function() {
             if (this.checked) {
-                const profileBtn = document.querySelector('.profile-btn-box button');
                 profileBtn?.removeAttribute('id');
                 profileBtn?.setAttribute('data-bs-toggle', 'dropdown');
                 profileRightSidebar?.classList.remove('active');
