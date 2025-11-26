@@ -1,8 +1,10 @@
 <script setup>
+import { useUser } from '@/composables/useUser';
 import { ref, onMounted, nextTick, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
 const route = useRoute();
+const { User } = useUser();
 
 onMounted(() => {
     nextTick(() => {
@@ -139,7 +141,7 @@ const scrollToActiveLink = () => {
     <div class="main-sidebar">
         <div class="main-menu">
             <ul class="sidebar-menu scrollable">
-                <li class="sidebar-item">
+                <li class="sidebar-item" v-if="User.is_verified">
                     <ul class="sidebar-link-group" style="display: block;">
                         <li class="sidebar-dropdown-item">
                             <RouterLink to="/dashboard" class="sidebar-link">
@@ -150,7 +152,7 @@ const scrollToActiveLink = () => {
                     </ul>
                 </li>
 
-                <li class="sidebar-item">
+                <li class="sidebar-item" v-if="!User.is_verified">
                     <a role="button" class="sidebar-link-group-title">Verification of personal data</a>
                     <ul class="sidebar-link-group">
                         <li class="sidebar-dropdown-item">
@@ -162,7 +164,7 @@ const scrollToActiveLink = () => {
                     </ul>
                 </li>
 
-                <li class="sidebar-item">
+                <li class="sidebar-item" v-if="User.is_verified">
                     <a role="button" class="sidebar-link-group-title">Trade</a>
                     <ul class="sidebar-link-group">
                         <li class="sidebar-dropdown-item">
@@ -181,7 +183,7 @@ const scrollToActiveLink = () => {
                         </li>
                     </ul>
                 </li>
-                <li class="sidebar-item">
+                <li class="sidebar-item" v-if="User.is_verified">
                     <a role="button" class="sidebar-link-group-title">Profile</a>
                     <ul class="sidebar-link-group">
                         <li class="sidebar-dropdown-item">
@@ -205,7 +207,7 @@ const scrollToActiveLink = () => {
                     </ul>
                 </li>
                     
-                <li class="sidebar-item">
+                <li class="sidebar-item" v-if="User.is_verified">
                     <a role="button" class="sidebar-link-group-title">Finance</a>
                     <ul class="sidebar-link-group">
                         <li class="sidebar-dropdown-item">
@@ -235,7 +237,7 @@ const scrollToActiveLink = () => {
                     </ul>
                 </li>
 
-                <li class="sidebar-item">
+                <li class="sidebar-item" v-if="User.is_verified">
                     <a role="button" class="sidebar-link-group-title">IB</a>
                     <ul class="sidebar-link-group">
                         <li class="sidebar-dropdown-item">
@@ -253,7 +255,7 @@ const scrollToActiveLink = () => {
                     </ul>
                 </li>
 
-                <li class="sidebar-item">
+                <li class="sidebar-item" v-if="User.is_verified">
                     <a role="button" class="sidebar-link-group-title">Sales</a>
                     <ul class="sidebar-link-group">
                         <li class="sidebar-dropdown-item">
@@ -283,12 +285,12 @@ const scrollToActiveLink = () => {
                     </ul>
                 </li>
 
-                <li class="help-center">
+                <li class="help-center" v-if="User.is_verified">
                     <h3>Help Center</h3>
                     <RouterLink to="/help-center" class="btn btn-sm btn-light">Go to Help Center</RouterLink>
                 </li>
 
-                <li class="help-center" style="margin-top: 20px;">
+                <li class="help-center" style="margin-top: 20px;" v-if="User.is_verified">
                     <p>Your Download is Just One Click Away!</p>
                     <RouterLink to="/downloads" class="btn btn-sm btn-light">Download</RouterLink>
                 </li>
