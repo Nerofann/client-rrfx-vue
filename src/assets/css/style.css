@@ -4845,8 +4845,8 @@ pre .punctuation {
 }
 
 .main-sidebar.collapsed {
-  position: relative;
-  padding-top: 0;
+  /* position: relative; */
+  /* padding-top: 0; */
   width: 70px;
 }
 .main-sidebar.collapsed::after {
