@@ -8,8 +8,13 @@ export const http = axios.create({
 
 http.interceptors.request.use((config) => {
     const token = useLocalStorage('access_token', null).value;
+    const refreshToken = useLocalStorage('refresh_token', null).value;
     if(token) {
         config.headers['Authorization'] = `Bearer ${token}`;
+    }
+
+    if(refreshToken) {
+        config.headers['X-Refresh-Token'] = refreshToken;
     }
 
     return config;
@@ -18,7 +23,15 @@ http.interceptors.request.use((config) => {
 http.interceptors.response.use(
     (response => parser(response)),
     (error) => {
-        return Promise.reject(error);
+        /** Handle error 401 (Token Expired / Invalid) */
+        if(error.response?.status === 401) {
+            useLocalStorage('access_token', null).value = null;
+            useLocalStorage('refresh_token', null).value = null;
+
+            if(window.location.pathname !== '/' || window.location.pathname !== '/signup') {
+                window.location.href = '/'; 
+            }
+        }
     }
 )
 
