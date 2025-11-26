@@ -1,29 +1,43 @@
-/**
- * @typedef {object} User
- * @property {string} fullname
- * @property {string} email
- * @property {string} phone
- * @property {string} createdAt
- * @property {string} updatedAt
- * 
- */
+import { userInterface } from "@/interface/user.interface";
+import { userStore } from "@/store/user.store";
+import { storeToRefs } from "pinia";
+import { onMounted, ref } from "vue";
 
-import { ref } from "vue";
+export const useUser = () => {
+    const store = userStore();
+    const { User, isLoaded } = storeToRefs(store); 
+    const { fetchUser } = store;
+    const loading = ref(false);
+    const error = ref(null);
+    
+    /** Load User */
+    const loadUser = async () => {
+        if(isLoaded.value) {
+            return;
+        }
 
-export const useUser = ({string: email, string: password}) => {
-    /** @type {User|null} */
-    const user = ref(null);
-    const isLoggedIn = ref(false);
+        try {
+            loading.value = true;
+            await fetchUser();
 
-    const setUser = (newUser) => {
-        user.value = newUser;
-        isLoggedIn.value = !!newUser;
+        } catch (err) {
+            error.value = err;
+        } finally {
+            loading.value = false;
+        }
     }
+
+    /** Refresh User Data */
+    const refresh = () => loadUser();
+
+    /** Initial */
+    onMounted(loadUser)
 
     return {
-        user,
-        isLoggedIn,
-        setUser
+        User,
+        loading,
+        error,
+        loadUser,
+        refresh
     }
-
 } 
