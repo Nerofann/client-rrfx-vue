@@ -13,7 +13,13 @@ import './assets/css/gold-color.css'
 
 /** Template Images */
 import './assets/images/logo-rrfx3.png'
-import './assets/images/error-404.png'
+import './assets/images/error/error-400.png'
+import './assets/images/error/error-403.png'
+import './assets/images/error/error-404.png'
+import './assets/images/error/error-408.png'
+import './assets/images/error/error-500.png'
+import './assets/images/error/error-503.png'
+import './assets/images/error/error-504.png'
 
 import { createApp } from 'vue'
 import App from './App.vue'

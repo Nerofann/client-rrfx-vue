@@ -1,5 +1,5 @@
 <script setup>
-import Error404 from '@/assets/images/error-404.png';
+import Error404 from '@/assets/images/error/error-404.png';
 </script>
 
 <template>
