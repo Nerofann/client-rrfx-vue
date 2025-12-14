@@ -2,9 +2,9 @@
 import { onMounted, nextTick, watch } from 'vue';
 import LogoWhite from '@/components/icons/LogoWhite.vue';
 import DefaultAvatar from '@/components/icons/DefaultAvatar.vue';
-import { useUser } from '@/composables/useUser';
+import { useUserStore } from '@/store/user.store';
 
-const { User, loading } = useUser();
+const { user, loading } = useUserStore();
 
 onMounted(() => {
     nextTick(() => {
@@ -346,8 +346,8 @@ const initHeaderCollapse = () => {
                         <ul class="dropdown-menu profile-dropdown-menu">
                             <li>
                                 <div class="dropdown-txt text-center">
-                                    <p v-if="!User || loading">Loading...</p>
-                                    <p v-else>{{ User.fullname }}</p>
+                                    <p v-if="!user || loading">Loading...</p>
+                                    <p v-else>{{ user.fullname }}</p>
                                 </div>
                             </li>
                             <li><a class="dropdown-item" href="/personal-information"><span class="dropdown-icon"><i class="fa-regular fa-circle-user"></i></span> Profile</a></li>
