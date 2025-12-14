@@ -8,6 +8,7 @@ export const useUserStore = defineStore("user", () => {
     const loading = ref(false);
     const isLoaded = ref(false);
     const isAuthed = computed(() => !!user.value);
+    const isFailed = ref(false);
 
     async function loadProfile(force = false) {
         if(loading.value) return;
@@ -22,7 +23,10 @@ export const useUserStore = defineStore("user", () => {
             }
             
             isLoaded.value = true;
-
+            if(!data) {
+                isFailed.value = true;
+            }
+        
         } finally {
             loading.value = false;
             // isLoaded.value = false;
@@ -39,6 +43,7 @@ export const useUserStore = defineStore("user", () => {
         loading,
         isLoaded,
         isAuthed,
+        isFailed,
         loadProfile,
         clear
     }
