@@ -259,14 +259,14 @@ const initHeaderCollapse = () => {
             <div class="col-xxl-6 col-xl-5 col-4 d-flex align-items-center gap-20">
                 <div class="main-logo d-lg-block d-none">
                     <div class="logo-big">
-                        <a href="/dashboard">
+                        <RouterLink to="/dashboard">
                             <LogoWhite />
-                        </a>
+                        </RouterLink>
                     </div>
                     <div class="logo-small">
-                        <a href="/dashboard">
+                        <RouterLink to="/dashboard">
                             <LogoWhite />
-                        </a>
+                        </RouterLink>
                     </div>
                 </div>
                 <div class="nav-close-btn">
@@ -275,9 +275,9 @@ const initHeaderCollapse = () => {
             </div>
             <div class="col-4 d-lg-none">
                 <div class="mobile-logo">
-                    <a href="/dashboard">
+                    <RouterLink to="/dashboard">
                         <LogoWhite />
-                    </a>
+                    </RouterLink>
                 </div>
             </div>
             <div class="col-xxl-6 col-xl-7 col-lg-8 col-4">
@@ -350,10 +350,10 @@ const initHeaderCollapse = () => {
                                     <p v-else>{{ user.fullname }}</p>
                                 </div>
                             </li>
-                            <li><a class="dropdown-item" href="/personal-information"><span class="dropdown-icon"><i class="fa-regular fa-circle-user"></i></span> Profile</a></li>
-                            <li><a class="dropdown-item" href="/help-center"><span class="dropdown-icon"><i class="fa-regular fa-circle-question"></i></span> Help</a></li>
+                            <li><RouterLink class="dropdown-item" to="/personal-information"><span class="dropdown-icon"><i class="fa-regular fa-circle-user"></i></span> Profile</RouterLink></li>
+                            <li><RouterLink class="dropdown-item" to="/help-center"><span class="dropdown-icon"><i class="fa-regular fa-circle-question"></i></span> Help</RouterLink></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="/logout"><span class="dropdown-icon"><i class="fa-regular fa-arrow-right-from-bracket"></i></span> Logout</a></li>
+                            <li><RouterLink class="dropdown-item" to="/logout"><span class="dropdown-icon"><i class="fa-regular fa-arrow-right-from-bracket"></i></span> Logout</RouterLink></li>
                         </ul>
                     </div>
                 </div>
