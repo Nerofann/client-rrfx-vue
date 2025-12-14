@@ -10738,6 +10738,7 @@ a.ck.ck-button:focus {
 
 /* ===== Main Content For Light Theme ===== */
 .light-theme .main-content {
+  height: 100vh;
   background-color: hsla(0, 0%, 85.04%, 0.4);
 }
 .light-theme .main-content::after {
