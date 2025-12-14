@@ -96,3 +96,8 @@ input[type=number] {
 input.error {
     border-color: var(--bs-danger) !important;
 }
+
+input[readonly],
+input[disabled] {
+    background: #ededed !important;
+}
