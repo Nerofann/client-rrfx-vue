@@ -1,3 +1,5 @@
+import { useCountryStore } from "@/store/countries.store";
+
 export const showPassword = (inputId) => {
     const inputElement = document.getElementById(inputId);
     const iconElement = document.querySelector(`[data-password-toggle="${inputId}"]`);
@@ -20,4 +22,10 @@ export const showPassword = (inputId) => {
             iconElement.classList.add('fa-eye');
         }
     }
+}
+
+export const countries = () => {
+    const countryStore = useCountryStore();
+    countryStore.load();
+    return countryStore.countries;
 }
