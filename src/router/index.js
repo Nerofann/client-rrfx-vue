@@ -9,7 +9,7 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
+      path: '',
       component: AuthLayout,
       meta: { requiresGuest: true },
       children: [
@@ -43,12 +43,12 @@ const router = createRouter({
       ]
     },
     {
-      path: '/dashboard',
+      path: '/',
       component: () => import('@/layouts/DashboardLayout.vue'),
       meta: { requiresAuth: true },
       children: [
         {
-          path: '',
+          path: 'dashboard',
           name: 'dashboard',
           component: () => import('@/views/dashboard/Dashboard.vue')
         },
