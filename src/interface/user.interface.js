@@ -13,3 +13,8 @@ export const userInterface = () => ({
     is_verified: false,
     app_theme: "light"
 })
+
+export const genderOptions = [
+    { text: "Laki-laki", value: "L" },
+    { text: "Perempuan", value: "P" }
+]
