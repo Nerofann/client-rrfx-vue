@@ -73,13 +73,13 @@ const router = createRouter({
       children: [
         {
           path: '',
-          name: 'notFound',
-          component: () => import('@/views/NotFound.vue')
+          name: 'error-404',
+          component: () => import('@/views/error/Error404.vue')
         },
         {
           path: 'error',
-          name: 'error',
-          component: () => import('@/views/NotFound.vue')
+          name: 'error-500',
+          component: () => import('@/views/error/Error500.vue')
         }
       ]
     }
@@ -104,6 +104,11 @@ router.beforeEach(async (to, from, next) => {
     await store.loadProfile();
     if(!store.user) {
       return next({ name: 'login' });
+    }
+
+    if(store.isFailed) {
+      console.log(1);
+      return next({ name: 'error-500' });
     }
     
     const isVerificationRoute = to.name && to.name.startsWith('verification-');
