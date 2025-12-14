@@ -1,30 +1,45 @@
 import { userProfile } from '@/api/user/user.api.js';
 import { defineStore } from 'pinia';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { userInterface } from "@/interface/user.interface";
 
-export const userStore = defineStore("user", () => {
-    const User = ref(userInterface());
+export const useUserStore = defineStore("user", () => {
+    const user = ref(userInterface());
+    const loading = ref(false);
     const isLoaded = ref(false);
+    const isAuthed = computed(() => !!user.value);
 
-    const fetchUser = async () => {
-        // Skip jika sedang loading atau sudah ada data
-        const data = await userProfile();
-        if(data) {
-            User.value = {
+    async function loadProfile(force = false) {
+        if(loading.value) return;
+        if(isLoaded.value && !force) return;
+        loading.value = true;
+        
+        try {
+            const data = await userProfile();
+            user.value = {
                 ...userInterface(),
                 ...data
-            };
-
+            }
+            
             isLoaded.value = true;
+
+        } finally {
+            loading.value = false;
+            // isLoaded.value = false;
         }
-        
-        return User.value;
+    }
+
+    function clear() {
+        user.value = null;
+        isLoaded.value = false;
     }
     
     return {
-        User,
+        user,
+        loading,
         isLoaded,
-        fetchUser
+        isAuthed,
+        loadProfile,
+        clear
     }
 });
